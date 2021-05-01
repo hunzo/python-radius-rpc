@@ -1,0 +1,17 @@
+version: '3'
+services: 
+    rabbitmq:
+        container_name: rabbitmq
+        image: rabbitmq:management
+        ports: 
+            - 5672:5672
+            - 15672:15672
+        
+    radius_rpc:
+        container_name: radius_rpc
+        build: radius_rpc/
+        environment: 
+            - RADIUS_SERVER=10.100.100.55
+            - RADIUS_SECRET=your_radius_secret_key
+        depends_on: 
+            - rabbitmq
